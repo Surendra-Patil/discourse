@@ -940,6 +940,10 @@ class TopicsController < ApplicationController
     guardian.ensure_can_moderate!(topic)
     topic.update!(slow_mode_seconds: params[:seconds])
 
+    enabled_until = params[:seconds].to_i.zero? ? nil : params[:enabled_until]
+
+    topic.set_or_create_timer(TopicTimer.types[:clear_slow_mode], enabled_until)
+
     head :ok
   end
 
