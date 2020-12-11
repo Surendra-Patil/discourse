@@ -51,6 +51,7 @@ RSpec.describe WebHookTopicViewSerializer do
       last_poster
       tags
       thumbnails
+      is_shared_draft
     }
 
     keys = serializer.as_json.keys
